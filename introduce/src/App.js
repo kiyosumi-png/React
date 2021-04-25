@@ -30,11 +30,9 @@ class Supporter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      question: '',
-      content: ''
+      question: ''
     }
     this.getQuestion = this.getQuestion.bind(this);
-    this.postHint = this.postHint.bind(this);
   }
 
    getQuestion () {
@@ -48,28 +46,12 @@ class Supporter extends React.Component {
       });
   }
 
-  // postHint () {
-  //   this.setState({ content: target.value })
-  //   axios.post('https://jsonplaceholder.typicode.com/posts/1', {
-  //     content: this.state.content
-  //   })
-  //   .then(function (response) {
-  //     console.log(response);
-  //   })
-  //   .catch(error =>{
-  //     console.log(error);
-  //   })
-  // }
-
+  
   render() {
     return(
       <div>
         <h1 onClick={ this.getQuestion }>お題</h1>
         <div>{this.state.question}</div>
-           {/* <label>
-            <input type="text"/>
-            <input type="submit" value="Submit" onSubmit={ this.postHint } />
-          </label>  */}
       </div>
     )
   }
@@ -78,30 +60,30 @@ class Supporter extends React.Component {
 export default App;
 // // React.componentを拡張してClockを作るJSXで書く
 // class Clock extends React.Component {
-//   // Clockクラスが作られたときに呼ばれる特別なメソッド
-//   // superはreact.componentを指している今受け取ったpropsを渡す
-//   constructor(props) {
-//     super(props);
-//     this.now = new Date();
+  //   // Clockクラスが作られたときに呼ばれる特別なメソッド
+  //   // superはreact.componentを指している今受け取ったpropsを渡す
+  //   constructor(props) {
+    //     super(props);
+    //     this.now = new Date();
 
-//     this.state = {
-  //       time: `${this.now.getHours()}:${this.now.getMinutes()}:${this.now.getSeconds()}`
-//     }
-
-//     this.refresh = this.refresh.bind(this);
+    //     this.state = {
+      //       time: `${this.now.getHours()}:${this.now.getMinutes()}:${this.now.getSeconds()}`
+      //     }
+      
+      //     this.refresh = this.refresh.bind(this);
 //   }
 
 //   // 定義したstateをsetStateで書き換える
-  // refresh() {
+// refresh() {
   //     this.now = new Date();
 
   //   this.setState((state) => ({
-  //     time: `${this.now.getHours()}:${this.now.getMinutes()}:${this.now.getSeconds()}`
+    //     time: `${this.now.getHours()}:${this.now.getMinutes()}:${this.now.getSeconds()}`
   //   }))
   // }
 
-//   render() {
-   
+  //   render() {
+    
 //     return <p onClick={this.refresh}>{this.state.time}</p>
 //   }
 // }
@@ -124,15 +106,15 @@ export default App;
 //   const { id } = props.match.params
 
 //   return(
-//     <div>
-//       <p>{id}番目の記事です</p>
-//     </div>
-//   )
-// }
-
-// const Sum = props => {
-//   const { num1, num2 } = props.match.params
-
+  //     <div>
+  //       <p>{id}番目の記事です</p>
+  //     </div>
+  //   )
+  // }
+  
+  // const Sum = props => {
+    //   const { num1, num2 } = props.match.params
+    
 //   return (
 //     <div>
 //       <p>{num1} + {num2} = {parseInt(num1) + parseInt(num2)}</p>
@@ -140,3 +122,16 @@ export default App;
 //   )
 // }
 
+
+// postHint () {
+//   this.setState({ content: target.value })
+//   axios.post('https://jsonplaceholder.typicode.com/posts/1', {
+//     content: this.state.content
+//   })
+//   .then(function (response) {
+//     console.log(response);
+//   })
+//   .catch(error =>{
+//     console.log(error);
+//   })
+// }
