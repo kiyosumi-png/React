@@ -1,4 +1,4 @@
-import React  from 'react';
+import React , { useRef } from 'react';
 import { BrowserRouter, Route, Link} from 'react-router-dom';
 import { createStore } from 'redux';
 import axios from'axios';
@@ -46,12 +46,29 @@ class Supporter extends React.Component {
       });
   }
 
+  postHint() {
+    axios.post('http://localhost:8080/api/v1/associative-hints', {
+        Content: "heyAxios",
+        Author:  "ImPost",
+        AssociativeQuestionID: 2,
+        TeamID: 5
+    })
+    .then(function(){
+      alert("成功");
+    })
+    .catch(error => {
+      console.log(error);
+      alert("失敗");
+    });
+  }
+
   
   render() {
     return(
       <div>
         <h1 onClick={ this.getQuestion }>お題</h1>
         <div>{this.state.question}</div>
+        <button onClick={ this.postHint }>ヒント送信</button>
       </div>
     )
   }
@@ -122,16 +139,3 @@ export default App;
 //   )
 // }
 
-
-// postHint () {
-//   this.setState({ content: target.value })
-//   axios.post('https://jsonplaceholder.typicode.com/posts/1', {
-//     content: this.state.content
-//   })
-//   .then(function (response) {
-//     console.log(response);
-//   })
-//   .catch(error =>{
-//     console.log(error);
-//   })
-// }
