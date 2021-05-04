@@ -1,6 +1,6 @@
-import React , { useRef } from 'react';
+import React  from 'react';
 import { BrowserRouter, Route, Link} from 'react-router-dom';
-import { createStore } from 'redux';
+// import { createStore } from 'redux';
 import axios from'axios';
 import './App.css';
 
@@ -30,10 +30,18 @@ class Supporter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      question: ''
+      value: ' ',
+      question: ' '
     }
     this.getQuestion = this.getQuestion.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.postHint =this.postHint.bind(this);
   }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
 
    getQuestion () {
     axios.get('https://jsonplaceholder.typicode.com/users')
@@ -48,7 +56,7 @@ class Supporter extends React.Component {
 
   postHint() {
     axios.post('http://localhost:8080/api/v1/associative-hints', {
-        Content: "heyAxios",
+        Content: this.state.value,
         Author:  "ImPost",
         AssociativeQuestionID: 2,
         TeamID: 5
@@ -68,7 +76,14 @@ class Supporter extends React.Component {
       <div>
         <h1 onClick={ this.getQuestion }>お題</h1>
         <div>{this.state.question}</div>
-        <button onClick={ this.postHint }>ヒント送信</button>
+        
+        <form onSubmit={this.postHint}>
+          <label>
+            Hint:
+            <input type="text" value={this.state.value} onChange={this.handleChange} />
+          </label>
+          <input type="submit" value="Submit"  />
+        </form>
       </div>
     )
   }
