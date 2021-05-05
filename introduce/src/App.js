@@ -10,6 +10,7 @@ const App = () => (
   <BrowserRouter>
       <div>
         <Route exact path="/associative" component={Split} />
+        <Route path="/associative/solver" component={Solver} />
         <Route path="/associative/supporter" component={Supporter} />
       </div>
     </BrowserRouter>
@@ -19,7 +20,67 @@ class Split extends React.Component {
   render() {
     return(
       <div>
-        <p><Link to="/associative/supporter">ヒントを出す人はこちら</Link></p>
+        <p><Link to="/associative/solver">回答する人はこちら</Link></p>
+        <p><Link to="/associative/supporter">サポーターはこちら</Link></p>
+      </div>
+    )
+  }
+}
+
+class Solver extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hint: '',
+      answer: ''
+    }
+    this.getHint = this.getHint.bind(this);
+    this.postAnswer = this.postAnswer.bind(this);
+    this.answerChange = this.answerChange.bind(this);
+  }
+
+  answerChange (event) {
+    this.setState({ answer: event.target.value });
+  }
+
+  getHint () {
+    axios.get('https://jsonplaceholder.typicode.com/users')
+      .then(res => {
+        this.setState({ hint: res.data[0].name });
+      })
+      .catch(error => {
+        // axiosのエラー処理
+        console.log(error);
+      });
+  }
+
+  postAnswer () {
+    axios.post('http://localhost:8080/api/v1/associative-questions/5/judge', {
+      Answer: this.state.answer,
+      QuestionID: 1,
+      TeamID: 5
+    })
+    .then(function(){
+      alert("成功");
+    })
+    .catch(error => {
+      alert("失败 + error");
+    });
+  }
+
+  render() {
+    return(
+      <div>
+        <button onClick={ this.getHint }>ヒントはこちら</button>
+        <div>{ this.state.hint }</div>
+
+        <form onSubmit={ this.postAnswer }>
+          <label>
+            answer:
+            <input type="text" value={ this.state.value } onChange={ this.answerChange } />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
       </div>
     )
   }
@@ -58,7 +119,7 @@ class Supporter extends React.Component {
     axios.post('http://localhost:8080/api/v1/associative-hints', {
         Content: this.state.value,
         Author:  "ImPost",
-        AssociativeQuestionID: 2,
+        AssociativeQuestionID: 1,
         TeamID: 5
     })
     .then(function(){
