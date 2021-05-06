@@ -12,6 +12,7 @@ const App = () => (
         <Route exact path="/associative" component={Split} />
         <Route path="/associative/solver" component={Solver} />
         <Route path="/associative/supporter" component={Supporter} />
+        <Route path="/associative/answer" component={Answer} />
       </div>
     </BrowserRouter>
 )
@@ -81,6 +82,8 @@ class Solver extends React.Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
+
+        <p><Link to="/associative/answer">正誤判定へ</Link></p>
       </div>
     )
   }
