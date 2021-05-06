@@ -153,6 +153,39 @@ class Supporter extends React.Component {
   }
 }
 
+class Answer extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      answer: ''
+    }
+    this.getAnswer = this.getAnswer.bind(this);
+  }
+
+
+  getAnswer() {
+    axios.get('https://jsonplaceholder.typicode.com/users') 
+    .then(res =>{
+      this.setState({ answer: res.data[0].name });
+    })
+    .catch(error =>{
+      alert(error);
+    })
+  }
+
+
+
+  render() {
+    return(
+      <div>
+        <button onClick={ this.getAnswer }>回答</button>
+        <div>{ this.state.answer }</div>
+      </div>
+    )
+  }
+}
+
 export default App;
 // // React.componentを拡張してClockを作るJSXで書く
 // class Clock extends React.Component {
