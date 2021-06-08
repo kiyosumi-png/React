@@ -3,8 +3,6 @@ import React  from 'react'
 import Header from './components/Header'
 import Home from './components/Home'
 
-// BrowserRouterでフロントの画面遷移
-// Routeでパスを指定
 function App () {
   return(
     <div className="App">
